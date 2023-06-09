@@ -1,4 +1,4 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
   AccumulativeShadows,
   Center,
@@ -8,6 +8,8 @@ import {
   useGLTF,
 } from "@react-three/drei";
 import "./App.css";
+import { useRef } from "react";
+import { easing } from "maath";
 
 export function Shirt(props) {
   const { nodes, materials } = useGLTF("/gltf/shirt_baked_1.glb");
@@ -69,6 +71,20 @@ const Backdrop = () => (
   </AccumulativeShadows>
 );
 
+const CameraRig = ({ children }) => {
+  const group = useRef();
+  useFrame((state, deleta) => {
+    easing.dampE(
+      // initial pointer.x = 0
+      group.current.rotation,
+      [state.pointer.y / 10, -state.pointer.x / 5, 0],
+      0.25,
+      deleta
+    );
+  });
+  return <group ref={group}>{children}</group>;
+};
+
 export const App = ({ position = [-1, 0, 2.5], fov = 25 }) => (
   <Canvas
     shadows
@@ -78,11 +94,13 @@ export const App = ({ position = [-1, 0, 2.5], fov = 25 }) => (
   >
     <ambientLight intensity={[0.5]} />
     <Environment preset="city" />
-    <Center>
-      <Shirt />
-      <Backdrop />
-    </Center>
-    <OrbitControls />
+    <CameraRig>
+      <Center>
+        <Shirt />
+        <Backdrop />
+      </Center>
+    </CameraRig>
+    {/* <OrbitControls /> */}
   </Canvas>
 );
 
