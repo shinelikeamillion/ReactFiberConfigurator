@@ -1,5 +1,12 @@
 import { Canvas } from "@react-three/fiber";
-import { Center, Environment, OrbitControls, useGLTF } from "@react-three/drei";
+import {
+  AccumulativeShadows,
+  Center,
+  Environment,
+  OrbitControls,
+  RandomizedLight,
+  useGLTF,
+} from "@react-three/drei";
 import "./App.css";
 
 export function Shirt(props) {
@@ -36,15 +43,44 @@ export function Shirt(props) {
   );
 }
 
+const Backdrop = () => (
+  <AccumulativeShadows
+    temporal
+    frames={60}
+    alphaTest={0.85}
+    scale={10}
+    rotation={[Math.PI / 2, 0, 0]}
+    position={[0, 0, -0.14]}
+  >
+    <RandomizedLight
+      amount={4}
+      radius={9}
+      intensity={0.55}
+      ambient={0.25}
+      position={[5, 5, -10]}
+    />
+    <RandomizedLight
+      amount={4}
+      radius={5}
+      intensity={0.25}
+      ambient={0.55}
+      position={[-5, 5, -9]}
+    />
+  </AccumulativeShadows>
+);
+
 export const App = ({ position = [-1, 0, 2.5], fov = 25 }) => (
-  <Canvas 
-  eventSource={document.getElementById('root')}
-  eventPrefix="client"
-  camera={{ position, fov }}>
-    <ambientLight intensity={[.5]}/>
-    <Environment preset="city"/>
+  <Canvas
+    shadows
+    eventSource={document.getElementById("root")}
+    eventPrefix="client"
+    camera={{ position, fov }}
+  >
+    <ambientLight intensity={[0.5]} />
+    <Environment preset="city" />
     <Center>
-      <Shirt/>
+      <Shirt />
+      <Backdrop />
     </Center>
     <OrbitControls />
   </Canvas>
