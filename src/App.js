@@ -12,10 +12,10 @@ import { useRef } from "react";
 import { easing } from "maath";
 
 export function Shirt(props) {
-  const { nodes, materials } = useGLTF("/gltf/shirt_baked_1.glb");
+  const { nodes, materials } = useGLTF("/gltf/shirt_baked_2.glb");
   return (
     <group {...props} dispose={null}>
-      <group position={[0.42, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
+      <group position={[0, 0, 0]} rotation={[Math.PI/2, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -85,7 +85,7 @@ const CameraRig = ({ children }) => {
   return <group ref={group}>{children}</group>;
 };
 
-export const App = ({ position = [-1, 0, 2.5], fov = 25 }) => (
+export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
   <Canvas
     shadows
     eventSource={document.getElementById("root")}
