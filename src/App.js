@@ -10,12 +10,13 @@ import {
 import "./App.css";
 import { useRef } from "react";
 import { easing } from "maath";
+import Overlay from "./Overlay";
 
-export function Shirt(props) {
+const  Shirt = (props) => {
   const { nodes, materials } = useGLTF("/gltf/shirt_baked_2.glb");
   return (
     <group {...props} dispose={null}>
-      <group position={[0, 0, 0]} rotation={[Math.PI/2, 0, 0]}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -85,7 +86,9 @@ const CameraRig = ({ children }) => {
   return <group ref={group}>{children}</group>;
 };
 
+
 export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
+  <>
   <Canvas
     shadows
     eventSource={document.getElementById("root")}
@@ -102,6 +105,8 @@ export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
     </CameraRig>
     {/* <OrbitControls /> */}
   </Canvas>
+  <Overlay/>
+  </>
 );
 
 useGLTF.preload("/gltf/shirt_baked.glb");
