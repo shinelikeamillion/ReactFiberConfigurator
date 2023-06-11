@@ -7,14 +7,22 @@ import {
   AiOutlineShopping,
 } from "react-icons/ai";
 
-const Overlay = () => <Intro />;
+import { useSnapshot } from "valtio";
+import { state } from "./store";
+
+const Overlay = () => {
+  const snap = useSnapshot(state)
+  return (
+    <div className="container">
+      <header>
+        <Logo with="40" height="40" />
+        <AiOutlineShopping size="3em" />
+      </header>
+      {snap.intro ? <Intro/> : <Customizer/>}
+  </div>)
+}
 
 const Intro = () => (
-  <div className="container">
-    <header>
-      <Logo with="40" height="40" />
-      <AiOutlineShopping size="3em" />
-    </header>
     <section className="main">
       <div className="section--container">
         <div>
@@ -26,14 +34,12 @@ const Intro = () => (
             customization tool. <strong>Unleash your imagination</strong> and
             define your own style.
           </p>
-          <button style={{ background: "black" }}>
+          <button style={{ background: "black" }} onClick={()=>{state.intro = false}}>
             CUSTOMIZE IT <AiOutlineHighlight size="1.3em" />
           </button>
         </div>
       </div>
-      <Customizer/>
     </section>
-  </div>
 );
 
 const Customizer = () => {
@@ -58,7 +64,7 @@ const Customizer = () => {
     </div>
 
     <button className="share" style={{background: 'black'}} >DOWNLOAD<AiFillCamera size='1.3em'/></button>
-    <button className="exit" style={{background: 'black'}} >GO BACK<AiOutlineLeft size='1.3em'/></button>
+    <button className="exit" style={{background: 'black'}} onClick={()=>{state.intro = true}}>GO BACK<AiOutlineLeft size='1.3em'/></button>
   </section>
 }
 

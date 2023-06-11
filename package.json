@@ -15,6 +15,7 @@
     "react-icons": "^4.9.0",
     "react-scripts": "5.0.1",
     "three": "^0.153.0",
+    "valtio": "^1.10.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
