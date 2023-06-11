@@ -18,7 +18,7 @@ import { state } from './store'
 
 const  Shirt = (props) => {
   const snap = useSnapshot(state)
-  const { nodes, materials } = useGLTF("/gltf/shirt_baked_collapsed.glb");
+  const { nodes, materials } = useGLTF("gltf/shirt_baked_collapsed.glb");
 
   // materials.lambert1.color = new THREE.Color(snap.selectedColor)
 
@@ -129,5 +129,5 @@ export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
   </>
 );
 
-useGLTF.preload("/gltf/shirt_baked_collapsed.glb");
+useGLTF.preload("gltf/shirt_baked_collapsed.glb");
 ['react.png', 'three2.png', 'pmndrs.png'].forEach(useTexture.preload)
