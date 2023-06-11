@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ReactFiberConfigurator/static/css/main.fadb85ce.css",
-    "main.js": "/ReactFiberConfigurator/static/js/main.a3b6018d.js",
+    "main.js": "/ReactFiberConfigurator/static/js/main.19857867.js",
     "index.html": "/ReactFiberConfigurator/index.html",
     "main.fadb85ce.css.map": "/ReactFiberConfigurator/static/css/main.fadb85ce.css.map",
-    "main.a3b6018d.js.map": "/ReactFiberConfigurator/static/js/main.a3b6018d.js.map"
+    "main.19857867.js.map": "/ReactFiberConfigurator/static/js/main.19857867.js.map"
   },
   "entrypoints": [
     "static/css/main.fadb85ce.css",
-    "static/js/main.a3b6018d.js"
+    "static/js/main.19857867.js"
   ]
 }
