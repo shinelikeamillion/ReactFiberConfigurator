@@ -8,7 +8,7 @@ import {
 
 import { useSnapshot } from "valtio";
 import { state } from "./store";
-import {AnimatePresence, animate, motion, spring} from 'framer-motion'
+import {AnimatePresence, motion} from 'framer-motion'
 
 const Overlay = () => {
   const snap = useSnapshot(state);

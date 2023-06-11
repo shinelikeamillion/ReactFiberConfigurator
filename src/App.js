@@ -13,7 +13,6 @@ import "./App.css";
 import { useRef } from "react";
 import { easing } from "maath";
 import Overlay from "./Overlay";
-import * as THREE from 'three'
 import { useSnapshot } from 'valtio'
 import { state } from './store'
 
@@ -130,5 +129,5 @@ export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
   </>
 );
 
-useGLTF.preload("/gltf/shirt_baked.glb");
+useGLTF.preload("/gltf/shirt_baked_collapsed.glb");
 ['react.png', 'three2.png', 'pmndrs.png'].forEach(useTexture.preload)
