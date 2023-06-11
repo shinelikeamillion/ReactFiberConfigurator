@@ -48,7 +48,7 @@ const Intro = () => (
 );
 
 const Customizer = () => {
-  const snap = useSnapshot(state)
+  const snap = useSnapshot(state);
   return (
     <section key="custom">
       <div className="customizer">
@@ -66,7 +66,11 @@ const Customizer = () => {
       <div className="decals">
         <div className="decals--container">
           {state.decals.map((decal) => (
-            <div key={decal} className="decal">
+            <div
+              key={decal}
+              className="decal"
+              onClick={() => (state.selectedDecal = decal)}
+            >
               <img src={decal + "_thumb.png"} alt="brand" />
             </div>
           ))}

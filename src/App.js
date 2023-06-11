@@ -2,10 +2,12 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import {
   AccumulativeShadows,
   Center,
+  Decal,
   Environment,
   OrbitControls,
   RandomizedLight,
   useGLTF,
+  useTexture,
 } from "@react-three/drei";
 import "./App.css";
 import { useRef } from "react";
@@ -17,50 +19,32 @@ import { state } from './store'
 
 const  Shirt = (props) => {
   const snap = useSnapshot(state)
-  const { nodes, materials } = useGLTF("/gltf/shirt_baked_2.glb");
+  const { nodes, materials } = useGLTF("/gltf/shirt_baked_collapsed.glb");
 
   // materials.lambert1.color = new THREE.Color(snap.selectedColor)
 
   useFrame((state, delta) =>
     easing.dampC(materials.lambert1.color, snap.selectedColor, 0.25, delta)
   )
+
+  const texture = useTexture(`${snap.selectedDecal}.png`)
+
   return (
-    <group {...props} dispose={null}>
-      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Mesh.geometry}
-          material={materials.lambert1}
-          material-roughness={1}
-          {...props}
+    <mesh
+      castShadow
+      geometry={nodes.T_Shirt_male.geometry}
+      material={materials.lambert1}
+      material-roughness={1}
+      {...props}
+      dispose={null}>
+        <Decal map={texture}
+        position={[0, .04, .15]}
+        rotation={[0,0,0]}
+        scale={.15}
+        opacity={.7}
+        map-anisotropy={16}
         />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Mesh_1.geometry}
-          material={materials.lambert1}
-          material-roughness={1}
-          {...props}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Mesh_2.geometry}
-          material={materials.lambert1}
-          material-roughness={1}
-          {...props}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Mesh_3.geometry}
-          material={materials.lambert1}
-          material-roughness={1}
-          {...props}
-        />
-      </group>
-    </group>
+      </mesh>
   );
 }
 
