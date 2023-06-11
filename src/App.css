@@ -209,7 +209,6 @@ button:hover {
   position: absolute;
   top: 40px;
   right: 40px;
-  background-color: black;
   box-shadow: inset 0 0 0 0.09px black;
 }
 
