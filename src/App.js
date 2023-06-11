@@ -106,6 +106,7 @@ const CameraRig = ({ children }) => {
 export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
   <>
   <Canvas
+    gl={{preserveDrawingBuffer: true}}
     shadows
     eventSource={document.getElementById("root")}
     eventPrefix="client"

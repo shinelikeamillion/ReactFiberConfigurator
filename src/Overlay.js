@@ -87,7 +87,14 @@ const Customizer = () => {
         GO BACK
         <AiOutlineLeft size="1.3em" />
       </button>
-      <button className="share" style={{ background: state.selectedColor }}>
+      <button className="share" style={{ background: state.selectedColor }}
+      onClick={()=>{
+        const link = document.createElement('a')
+        link.setAttribute('download', 'canvas.png')
+        link.setAttribute('href', document.querySelector('canvas').toDataURL('image/png').replace('image/png', 'image/octet-steam'))
+        link.click()
+      }}
+      >
         DOWNLOAD
         <AiFillCamera size="1.3em" />
       </button>
