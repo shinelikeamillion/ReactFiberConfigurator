@@ -126,3 +126,4 @@ export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
 );
 
 useGLTF.preload("/gltf/shirt_baked.glb");
+['react.png', 'three2.png', 'pmndrs.png'].forEach(useTexture.preload)
