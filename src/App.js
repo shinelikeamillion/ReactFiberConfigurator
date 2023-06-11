@@ -90,7 +90,11 @@ const Backdrop = () => {
 
 const CameraRig = ({ children }) => {
   const group = useRef();
+  const snap = useSnapshot(state)
   useFrame((state, deleta) => {
+    easing.damp3(state.camera.position, [
+      snap.intro ? -state.viewport.width / 5 : 0
+      , 0, 2], .25, deleta)
     easing.dampE(
       // initial pointer.x = 0
       group.current.rotation,

@@ -8,22 +8,35 @@ import {
 
 import { useSnapshot } from "valtio";
 import { state } from "./store";
+import {AnimatePresence, animate, motion, spring} from 'framer-motion'
 
 const Overlay = () => {
   const snap = useSnapshot(state);
+  const transition={type:'spring', duration: .8}
+  const config = {
+    initial: {x: -100, opacity: 0, transition: {...transition, delay:.5}},
+    animate: {x: 0, opacity: 1, transition: {...transition, delay:0}},
+    exit: {x: -100, opacity: 0, transition: {...transition, delay:0}}
+  }
   return (
     <div className="container">
-      <header>
+      <motion.header
+      initial={{opacity:0, y: -20}}
+      animate={{opacity:1, y: 0}}
+      transition={{type:'spring', duration: 1.8, delay:1}}>
         <Logo with="40" height="40" />
         <AiOutlineShopping size="3em" />
-      </header>
-      {snap.intro ? <Intro /> : <Customizer />}
+      </motion.header>
+      <AnimatePresence>
+
+      {snap.intro ? <Intro key='main' config={config} /> : <Customizer key='custom' config={config} />}
+      </AnimatePresence>
     </div>
   );
 };
 
-const Intro = () => (
-  <section className="main">
+const Intro = ({config}) => (
+  <motion.section className="main" {...config}>
     <div className="section--container">
       <div>
         <h1>LET'S DO IT.</h1>
@@ -44,13 +57,13 @@ const Intro = () => (
         </button>
       </div>
     </div>
-  </section>
+  </motion.section>
 );
 
-const Customizer = () => {
+const Customizer = ({config}) => {
   const snap = useSnapshot(state);
   return (
-    <section key="custom">
+    <motion.section key="custom" {...config}>
       <div className="customizer">
         <div className="color-options">
           {state.colors.map((color) => (
@@ -98,7 +111,7 @@ const Customizer = () => {
         DOWNLOAD
         <AiFillCamera size="1.3em" />
       </button>
-    </section>
+    </motion.section>
   );
 };
 
